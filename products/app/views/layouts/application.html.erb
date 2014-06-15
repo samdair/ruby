@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habesha Products</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+ 
+  <h1 class="animated bounceIn" style="text-align: center;"  >
+  	<iframe src="/flash/intro.swf" 
+  width="500" height="100" align="center" frameborder=""></iframe>
+  </h1>
+  
+  <nav class="navbar navbar-inverse" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/products">Home</a></li>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        	<% if logged_in? && current_user.admin? %>
+         <li><%= link_to 'Products', products_path %></li>
+		<li><%= link_to 'Users', users_path %></li>
+		<li><%= link_to 'Contact us', new_message_path %></li>
+		<li><%= link_to 'Messages', messages_path %></li>
+		<li><%= link_to 'Orders', orders_path %></li>
+		<li><%= link_to "Sign up", new_user_path %> </li> 
+
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+          <li class="divider"></li>
+          <li><a href="#">One more separated link</a></li>
+        <% else %>
+        <li><%= link_to 'Products', products_path %></li>
+		<li><%= link_to 'Contact us', new_message_path %></li>
+		 <li><%= link_to "Sign up", new_user_path %> </li> 
+
+		 <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+          <li class="divider"></li>
+          <li><a href="#">One more separated link</a></li>
+        <% end%>
+        </ul>
+      </li>
+    </ul>	
+	
+	<%= form_tag( products_path, method: :get, class: "navbar-form navbar-left")  do %>
+    <div class="form-group">              
+    <%= text_field_tag :search ,nil, class:"form-control", placeholder: 'Search' %>
+    </div>    
+    <%= submit_tag "Search",:name => nil,class: "btn btn-success" %> 
+    <% end %>
+    
+    
+     <%= form_tag( user_sessions_path, :class=> "navbar-form navbar-right")  do %>
+     <div class="form-group">              
+    <%= text_field_tag :email,nil, class:"form-control", placeholder: 'Your email' %>
+    </div>
+    <div class="form-group">
+    <%= password_field_tag :password,nil, class:"form-control", placeholder: 'Your password' %>
+       </div>
+     
+    <% if logged_in?%>        
+    <%= link_to "Logout", :logout, method: :post, class: "btn btn-danger" %>         
+            
+    <% else %> 
+    <%= submit_tag "Login",class: "btn btn-success" %> 
+    <%=link_to 'SignUp', new_user_path, class: "btn btn-primary" %>   
+        <% end %>     
+        <% end %>      
+
+  <!-- /.navbar-collapse --> 
+   </div> 
+  </div> 
+</nav> 
+        
+          
+  <% if notice %>
+  <div class="alert alert-success" style="text-align: center;"><%= notice %></div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-danger" style="text-align: center;"><%= alert %></div>
+<% end %>
+  
+      <div class="container">
+      	<div class="row row-offcanvas row-offcanvas-right">
+      		  <div class="col-xs-12 col-sm-9">
+	<%= yield %>
+	</div> 
+	 
+	
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <a href="" class="list-group-item active">Category</a>
+            <%= link_to "Food" , products_path(:category=>"Food"), class: "list-group-item" %>
+            <%= link_to "Electronics" , products_path(:category=>"Electronics"), class: "list-group-item" %>
+            <%= link_to "Clothes" , products_path(:category=>"Clothes"), class: "list-group-item" %>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div>
+	  </div>    
+	     
+</div> 
+
+ 
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE >
+<html>
+	<body>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+  <h1 class="panel-title" style="text-align: center;"  >Products</h1>
+  </div>
+   <div class="panel-body">
+
+<table class="table table-striped">  
+	
+   <tbody >   	 
+	
+<% @products.each do |product| %>
+ <tr>    	
+  <td>
+   <% if product.image.exists? %>
+    <%= image_tag product.image.url :small %></br>
+   <% end %>
+  </td>
+    <td><strong><%= truncate(strip_tags(product.name), length: 45) %></strong></br>
+    	
+    <strong><%= number_to_currency(product.price) %></strong></br>                     
+    
+    <% if logged_in? && current_user.admin? %>
+	<%= link_to 'Show', product %></br>
+    <%= link_to 'Edit', edit_product_path(product) %></br>
+    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+   <%else%>
+   <%= link_to 'Show', product %>
+   <% end %>
+   
+   <%= button_to 'Add to Cart', line_items_path(product_id: product),class: "btn btn-success" %>
+   </td>        
+  </tr>        
+<% end %> 
+   
+  </tbody> 
+   
+</table> 
+
+<%= link_to 'New Product', new_product_path,class: "btn btn-success" %>
+
+</br>
+</div>
+</div>
+<!--
+<iframe id="blockrandom" name="iframe" src="http://teshamo.com/tplayer/myWimpy.html" width="100%" height="480" scrolling="no" align="top" frameborder="0" class="wrapper">
+		This option will not work correctly.  Unfortunately, your browser does not support Inline Frames		</iframe>
+-->
+<%= paginate @products %>
+  </body>
+	</html>
+
+  
+

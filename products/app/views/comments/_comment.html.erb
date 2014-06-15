@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+  
+  
+   <div class="panel-body">
+<p>
+  <strong>Name:</strong>
+  <%= comment.name %>
+</p>
+ 
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+<p>
+  <strong>Rate:</strong>
+  <%= comment.rate %>
+</p>
+<p>Posted <%= distance_of_time_in_words(Time.now - comment.created_at) %> ago </p>
+
+<p>
+	<% if logged_in? %>
+	<%=link_to 'Edit', edit_product_comment_path(@product,comment)%> |
+  <%= link_to 'Destroy Comment', [comment.product, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+    <% end %>
+</p>
+</div>
+</div>

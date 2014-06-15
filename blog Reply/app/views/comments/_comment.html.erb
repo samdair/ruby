@@ -1,0 +1,20 @@
+
+  <i>
+    <%= comment.created_at.strftime('%b %d, %Y at %H:%M')  %>
+  </i>
+  <p>
+    <%= simple_format comment.content %>
+  </p>
+  
+    <div class= "comment">
+	<%= render 'comments/form' %>
+	</div>
+  
+   <%= link_to "Reply", new_polymorphic_path([@commentable, Comment.new], :parent_id => comment) %>
+   
+   <p id="comments">
+  <%= nested_comments comment.children %>
+
+</p> 
+
+

@@ -1,0 +1,26 @@
+<h1>Editing comment</h1>
+ 
+<%= form_for([@comment.product, @comment]) do |f| %>
+ 
+ 
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :created %><br />
+    <%= f.date_select :created_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+ 
+<!-- /posts/:post_id/comments/:id -->
+<%= link_to 'Show', [@comment.product, @comment] %> |
+<!-- /posts/:post_id/comments/ -->
+<%= link_to 'Back', product_comments_path(@comment.product) %>

@@ -1,0 +1,39 @@
+<table>
+	<tbody>
+<tr>
+ <td colspan="2"><strong><%= @article.title %></strong></br>  
+  <td>
+  	</tr>
+  	<tr>
+  		<td>
+  	<div style="float: left; width: 230px;">
+  <% if @article.photo.exists? %>
+  	<%= image_tag @article.photo.url :large %></br>
+  <% end %>
+
+	</div>
+	<div style="clear: right;">
+<%= @article.body %></br>
+ 
+ </div>
+  </td>
+  
+  </tr>
+  <tr>
+  	<td colspan="2"><strong>Author:</strong>
+  <%= @article.author %>
+  
+  <strong>published:</strong> <%= time_ago_in_words(@article.published_at) %> ago </br>
+          
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+<h1> Add comments</h1>
+  <%= render 'comments/form' %>
+

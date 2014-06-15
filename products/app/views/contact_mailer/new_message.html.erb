@@ -1,0 +1,7 @@
+<h1>Email from Habesha Products</h1>
+<ul>
+	<li>From: <%= @message.name %></li>
+	<li>Email: <%= @message.email %></li>
+	<li>Sent on: <%= Time.now.strftime("%b %d, %Y at %I%p") %></li>
+</ul>
+<p>Message: <%= @message.body %></p>

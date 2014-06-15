@@ -1,0 +1,41 @@
+<table>
+	<tbody>
+<tr>
+ <td colspan="2"><strong style="font-family: 'Droid Sans Ethiopic', serif;"><%= @article.title %></strong></br>  
+  <td>
+  	</tr>
+  	<tr>
+  		<td>
+  	<div style="float: left; width: 230px;">
+  <% if @article.photo.exists? %>
+  	<%= image_tag @article.photo.url :large %></br>
+  <% end %>
+
+	</div>
+	<div style="clear: right;">
+<%= @article.body %></br>
+ 
+ </div>
+  </td>
+  
+  </tr>
+  <tr>
+  	<td colspan="2"><strong>Author:</strong>
+  <%= @article.author %>
+  <strong>Published at:</strong>
+  <%= @article.published_at.strftime("%B %d, %Y")%></br>
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+</td>
+</tr>
+</tbody>
+</table>
+<%= link_to_function "Comments" , "$('.comment').toggle(1000)" %>
+ (<%=@article.comments.size %>)</br>
+
+<div class= "comment">
+
+<%= render @article.comments %>
+<h2>Add a comment</h2>
+<%= render "comments/form" %>
+</div>

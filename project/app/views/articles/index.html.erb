@@ -1,0 +1,41 @@
+<h1>Listing articles</h1>
+
+<table>
+  <tbody>  	
+<% @articles.each do |article| %>  
+  	<tr>
+  	<td colspan="2"><strong>
+  		<%= article.title %></strong></br></td>
+    </tr>
+      <tr>      	
+       <td> 
+       	<div style="float: left; width: 110px;">
+       	<% if article.photo.exists? %>
+	  	<%= image_tag article.photo.url :medium %>
+	    <% end %>
+        </div>
+       <div style="clear: right;">
+        <%= truncate article.body, length: 300 %></br>
+        <%= link_to 'Read more', article %>        
+        <% if (article.owned_by? current_user) || (!current_user.nil? && current_user.admin?) %>
+        <%= link_to 'Edit', edit_article_path(article) %>
+        <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        </div>
+        </td>
+        </tr>
+        <tr>     
+        	<td colspan="2">
+        <strong>Author: </strong><%= article.author %>         
+        <strong>published:</strong> <%= time_ago_in_words(article.published_at) %> ago </br>
+   </br> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Article', new_article_path %>
+

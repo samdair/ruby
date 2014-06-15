@@ -1,0 +1,20 @@
+<%= form_for([@product, @product.comments.build]) do |f| %>
+  
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :rate %><br>
+    <%= f.select :rate, Comment::RATE_TYPES,
+    prompt: 'Select rate' %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

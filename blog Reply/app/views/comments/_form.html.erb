@@ -1,0 +1,7 @@
+
+<%= form_for [@commentable, @comment] do |f| %>
+  <%= f.hidden_field :parent_id %>    
+    <%= f.text_area :content %> </br>
+    <%= f.submit %>
+  
+<% end %>
